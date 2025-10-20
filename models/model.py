@@ -195,22 +195,12 @@ class fusion_model_binary_2(nn.Module):
     
 
 def create_model_binary(mode='full', checkpoint="/home/student/Documents/jingjie/research/PTM-site/output/best_model_v2_8_high_aa.pth", model_checkpoint="facebook/esm2_t6_8M_UR50D", num_classes=2):
-    # model = create_model(mode='lora').to(config.device) # full, lora, last_layer
     model = create_model_trans_bias(mode='lora',model_checkpoint=model_checkpoint).to(config.device)
     mlp_binary = AMPPredictor(num_labels=1).to(config.device)
-    mlp_multi = AMPPredictor(num_labels=num_classes).to(config.device)
     
-    # zjj_finetune_ablation_study
     state_dict = torch.load(checkpoint, map_location=config.device)
     model.load_state_dict(state_dict)
-    # return model
-    # zjj_finetune_omni_new
-    # # 冻住模型参数
-    # for param in model.esm.parameters():
-    #     param.requires_grad = False
-    # 设计finetune的模型
     finetune_model = fusion_model_binary_2(model, mlp_binary)
-    # finetune_model = fusion_model_2(model, mlp_binary, mlp_multi)
     return finetune_model
 
 
@@ -222,7 +212,7 @@ class LoRAESMWithTransformer(nn.Module):
         super().__init__()
         self.esm = esm_model
         esm_config = EsmConfig.from_pretrained(model_checkpoint)
-        self.aa2clm = torch.load("aa2selfies_embeddings.pt")
+        self.aa2clm = torch.load("../data/aa2selfies_embeddings.pt")
         self.custom_layers = nn.ModuleList([
             CustomTransformerLayer(esm_config, crosstalk_matrix, mlp=esm_mlp)
             for _ in range(num_custom_layers)
@@ -288,6 +278,9 @@ class LoRAESMWithTransformer(nn.Module):
         fused = F.sigmoid(f1) * esm_hidden * self.a[0] + f2 * self.a[1]
         
         attention_mask = attention_mask[:, 1:-1]
+        if config.version == "stage2":
+            prompt_fused = fused
+            return prompt_fused
         attention_mask = attention_mask[:, 10:-10]
         prompt_fused = fused[:, 10:-10]
         for layer in self.custom_layers:
@@ -315,7 +308,7 @@ def create_model_trans_bias(mode='full', model_checkpoint="facebook/esm2_t6_8M_U
         lora_esm = base_model
 
     esm_mlp = AMPPredictor(num_labels=num_classes)
-    crosstalk_matrix = torch.load("matrix.pt")
+    crosstalk_matrix = torch.load("../data/matrix.pt")
 
     full_model = LoRAESMWithTransformer(
         esm_model=lora_esm,

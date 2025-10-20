@@ -4,7 +4,7 @@ import torch.nn as nn
 from tqdm import tqdm
 from config_pep import config
 from dataset import load_data_, load_data_finetune_binary, load_data_finetune_omni
-from model import AMPPredictor, create_model_finetune, create_model_binary, create_model_trans_bias
+from model import AMPPredictor, create_model_binary, create_model_trans_bias
 from loss import HybridMacroMicroLoss, FinetuneBinaryLoss
 from sklearn.metrics import precision_recall_fscore_support, accuracy_score, roc_auc_score, average_precision_score, matthews_corrcoef, roc_curve, precision_recall_curve, f1_score, precision_score, recall_score, balanced_accuracy_score, confusion_matrix
 import wandb
@@ -308,11 +308,8 @@ def train_model(version="stage1"):
 if __name__ == "__main__":
     print("Training model with a specified version.")
     parser = argparse.ArgumentParser(description='Train a model with a specified version.')
-    
-    parser.add_argument('--version', type=str, default='stage1',
-                        help='Version of the model to train (default: stage1)')
     print("Version of the model to train (default: stage1)")
     args = parser.parse_args()
 
-    print(f"Training model with version: {args.version}")
-    train_model(args.version)
+    print(f"Training model with version: {config.version}")
+    train_model(config.version)

@@ -1,10 +1,18 @@
 import torch
 
 class Config:
+    version = "stage2"
     #------------- Data -------------
-    train_file = '../data/add_10aa/train_data.csv'
-    valid_file = '../data/add_10aa/valid_data.csv'
-    test_file = '../data/add_10aa/test_data_new.csv'
+    # ============ stage1: multi-label classification ============
+    if version == "stage1":
+        train_file = '../data/stage1/train_data.csv'
+        valid_file = '../data/stage1/valid_data.csv'
+        test_file = '../data/stage1/test_data_new.csv'
+    # ============ stage2: enzyme-substrate pairing ============
+    elif version == "stage2":
+        train_file = '../data/stage2/kinase/train_kin.csv'
+        valid_file = '../data/stage2/kinase/valid_kin.csv'
+        test_file = '../data/stage2/kinase/test_kin.csv'
 
     # ------------- Model -------------
     esm2_model = "esm2_t30_150M_UR50D"
@@ -24,12 +32,12 @@ class Config:
     max_seq_len = 70
     early_stop = True
     patience = 20 
-    use_wandb = True
+    use_wandb = False
     wandb_project = "PTM-MF"
     
     # ------------- Checkpoint & Output -------------
     model_save_path = "../output/stage1/multi-label/"
-    checkpoint = "/data0/lsn1/jjzhang/PTM-Site/output/best_model_v2_8_loss_dice_simfocalbce.pth"
+    checkpoint = "../checkpoint/best_stage1.pth"
     
     # ------------- Evaluation -------------
     threshold = 0.5  # For multi-label classification
