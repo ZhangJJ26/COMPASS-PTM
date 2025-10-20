@@ -4,7 +4,7 @@
 
 **COMPASS-PTM** is an interpretable, coarse-to-fine framework that provides an end-to-end solution from proteome-scale, multi-label site profiling to enzyme-substrate pairing. It deciphers the combinatorial "PTM code" to generate testable, mechanistic hypotheses.
 
-![COMPASS_PTM_main](/figures/COMPASS_PTM_main.jpg)
+![COMPASS_PTM_main](COMPASS_PTM_main.jpg)
 
 ## Installation
 
