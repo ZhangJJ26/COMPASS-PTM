@@ -1,4 +1,4 @@
-# COMPASS-PTM: A Unified Coarse-to-Fine Multiple PTM Prediction Framework
+# Learning the PTM Code through a Coarse-to-Fine, Mechanism-Aware Framework
 
 ## Introduction
 
