@@ -238,8 +238,6 @@ class LoRAESMWithTransformer(nn.Module):
         self.classifier = AMPPredictor()
 
     def forward(self, input_ids, attention_mask, protein_sequences, return_dict=None):
-        for param in self.esm.parameters():
-            param.requires_grad = False
         esm_outputs = self.esm(
             input_ids=input_ids,
             attention_mask=attention_mask,
