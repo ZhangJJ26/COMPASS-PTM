@@ -286,6 +286,9 @@ def train_model(version="stage1"):
     best_val_f1 = 0.0
     best_epoch = 0
     
+    if not os.path.exists(config.model_save_path):
+        os.makedirs(config.model_save_path)
+    
     for epoch in range(config.num_epochs):
         train_loss = train(model, train_loader, optimizer, criterion, config.device, version=version, centroids=train_centroid, mlp=mlp)
         val_loss, f1 = validate(model, val_loader, criterion_val, config.device, config.num_labels, version=version, centroids=val_centroid, mlp=mlp)
@@ -310,6 +313,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Train a model with a specified version.')
     print("Version of the model to train (default: stage1)")
     args = parser.parse_args()
+    set_seed(config.seed)
 
     print(f"Training model with version: {config.version}")
     train_model(config.version)
