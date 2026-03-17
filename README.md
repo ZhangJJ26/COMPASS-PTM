@@ -6,6 +6,19 @@
 
 ![COMPASS_PTM_main](COMPASS_PTM_main.jpg)
 
+## System Requirements
+
+### Hardware requirements
+
+COMPASS-PTM requires a standard computer with enough RAM to support the in-memory operations. For deep learning tasks, a CUDA-enabled GPU is strictly recommended (e.g., NVIDIA RTX 3090 or A100).
+
+### Software requirements
+
+The software has been tested on the following systems:
+
+- Linux
+- Python: 3.12
+
 ## Installation
 
 1. **Clone the repository:**
@@ -32,13 +45,21 @@
 
 4. **Download the Datasets**
 
-   You can use the mini version in the `data` folder to understand the dataset format. The full dataset will be uploaded later.
+   You can use the mini version in the `data` folder to understand the dataset format. The full dataset link to be updated upon publication.
 
 ## Usage
 
 ### Inference
 
 Please refer to the `models/inference.ipynb` file.
+
+#### Demo Execution
+
+1. Open `models/inference.ipynb`.
+2. Run all cells.
+
+- **Expected output:** A list of predicted PTM sites with probability scores (0-1).
+- **Expected run time:** Less than 1 minute on a single GPU.
 
 ### Training
 
@@ -93,4 +114,3 @@ Please refer to the `models/inference.ipynb` file.
 
    *   **Evaluation (`threshold`)**:
        *   `threshold`: The threshold for classifying positive labels in the multi-label classification task.
-

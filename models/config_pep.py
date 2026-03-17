@@ -34,6 +34,7 @@ class Config:
     patience = 20 
     use_wandb = False
     wandb_project = "PTM-MF"
+    seed = 42
     
     # ------------- Checkpoint & Output -------------
     model_save_path = "../output/stage1/multi-label/"
