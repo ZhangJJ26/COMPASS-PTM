@@ -1,5 +1,7 @@
 # Learning the PTM Code through a Coarse-to-Fine, Mechanism-Aware Framework
 
+[![DOI](https://zenodo.org/badge/1078109165.svg)](https://doi.org/10.5281/zenodo.19625753)
+
 ## Introduction
 
 **COMPASS-PTM** is an interpretable, coarse-to-fine framework that provides an end-to-end solution from proteome-scale, multi-label site profiling to enzyme-substrate pairing. It deciphers the combinatorial "PTM code" to generate testable, mechanistic hypotheses.
