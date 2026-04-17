@@ -43,11 +43,11 @@ The software has been tested on the following systems:
    mkdir checkpoint
    ```
 
-   The pretrained model can be downloaded from the [releases page](https://github.com/ZhangJJ26/COMPASS-PTM/releases) and should be placed in the `checkpoint` directory.
+   The pretrained model can be downloaded from the [releases page](https://github.com/ZhangJJ26/COMPASS-PTM/releases/download/checkpoint/checkpoints.tar.gz) and should be placed in the `checkpoint` directory.
 
 4. **Download the Datasets**
 
-   You can use the mini version in the `data` folder to understand the dataset format. The full dataset link to be updated upon publication.
+   You can use the mini version in the `data` folder to understand the dataset format. The full COMPASS-PTM datasets used in this study can be download from [Zenodo](https://zenodo.org/records/18389225).
 
 ## Usage
 
